@@ -69,7 +69,7 @@ function Curp() {
       const letraMayuscula = letra.toUpperCase();
       if (vocales.includes(letraMayuscula)) {
         contadorVocales++;
-        if (contadorVocales === 1) {
+        if (contadorVocales === 2 || (contadorVocales === 1 && apellido[0].toUpperCase() !== letraMayuscula)) {
           return letraMayuscula;
         }
       }
@@ -113,7 +113,7 @@ function Curp() {
     const entidadAbreviatura = entidadNacimiento.slice(0, 2);
     const sexoMayusculas = sexo.toUpperCase();
     const vocalAleatoria = generarVocalAleatoria();
-    const digitoAleatorio= Math.floor(Math.random() * 9);
+    const digitoAleatorio = Math.floor(Math.random() * 9);
     const curpGenerada = primeraLetraPrimerApellido + segundaVocalPrimerApellido + primeraLetraSegundoApellido + primeraLetraPrimerNombre + fechaNacimiento + sexoMayusculas + entidadAbreviatura + segundaConsonantePrimerApellido + segundaConsonanteSegundoApellido + primeraConsonantePrimerNombre + vocalAleatoria + digitoAleatorio;
 
     return curpGenerada;
@@ -226,7 +226,9 @@ function Curp() {
           <p>Fecha de nacimiento: {dia}/{mes}/{ano}</p>
           <p>Entidad de nacimiento: {entidadNacimiento}</p>
           <p>CURP: {curpGenerada}</p>
-          <QRCode value={curpGenerada} />
+          <div className='QR'>
+            < QRCode value={curpGenerada} />
+          </div>
         </div>
       )}
 

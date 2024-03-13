@@ -27,3 +27,20 @@
     border-radius: 5px;
 }
 
+.curp{
+    width: 80%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #0000001a;
+    border-radius: 5px;
+}
+
+.QR{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #0000001a;
+    border-radius: 5px;
+}
+
