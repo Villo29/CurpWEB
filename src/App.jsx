@@ -87,6 +87,14 @@ function Curp() {
     return 'X';
   };
 
+  const generarVocalAleatoria = () => {
+    const vocales = ['A', 'E', 'I', 'O', 'U'];
+    const indiceAleatorio = Math.floor(Math.random() * vocales.length);
+    return vocales[indiceAleatorio];
+  };
+
+
+
   const generarCURP = () => {
     let primerNombreGenerar = primernombre.toUpperCase();
     if (primerNombreGenerar === 'ANDRES' || primerNombreGenerar === 'MANUEL') {
@@ -103,7 +111,9 @@ function Curp() {
     const fechaNacimiento = ano.slice(-2) + mes.padStart(2, '0') + dia.padStart(2, '0');
     const entidadAbreviatura = entidadNacimiento.slice(0, 2);
     const sexoMayusculas = sexo.toUpperCase();
-    const curpGenerada = primeraLetraPrimerApellido + segundaVocalPrimerApellido + primeraLetraSegundoApellido + primeraLetraPrimerNombre + fechaNacimiento + sexoMayusculas + entidadAbreviatura + segundaConsonantePrimerApellido + segundaConsonanteSegundoApellido + primeraConsonantePrimerNombre;
+    const vocalAleatoria = generarVocalAleatoria();
+    const digitoAleatorio= Math.floor(Math.random() * 9);
+    const curpGenerada = primeraLetraPrimerApellido + segundaVocalPrimerApellido + primeraLetraSegundoApellido + primeraLetraPrimerNombre + fechaNacimiento + sexoMayusculas + entidadAbreviatura + segundaConsonantePrimerApellido + segundaConsonanteSegundoApellido + primeraConsonantePrimerNombre + vocalAleatoria + digitoAleatorio;
 
     return curpGenerada;
   };
