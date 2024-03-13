@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import QRCode from 'qrcode.react';
 import '../src/index.css';
 
 
@@ -225,6 +226,7 @@ function Curp() {
           <p>Fecha de nacimiento: {dia}/{mes}/{ano}</p>
           <p>Entidad de nacimiento: {entidadNacimiento}</p>
           <p>CURP: {curpGenerada}</p>
+          <QRCode value={curpGenerada} />
         </div>
       )}
 
