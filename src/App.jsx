@@ -68,7 +68,7 @@ function Curp() {
       const letraMayuscula = letra.toUpperCase();
       if (vocales.includes(letraMayuscula)) {
         contadorVocales++;
-        if (contadorVocales === 2) {
+        if (contadorVocales === 1) {
           return letraMayuscula;
         }
       }
