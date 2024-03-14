@@ -16,6 +16,14 @@ function Curp() {
   const [sexo, setSexo] = useState('');
   const [entidadNacimiento, setEntidadNacimiento] = useState('');
   const [curpGenerada, setCurpGenerada] = useState('');
+  const valores = {
+    '0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9,
+    'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15, 'G': 16, 'H': 17, 'I': 18,
+    'J': 19, 'K': 20, 'L': 21, 'M': 22, 'N': 23, 'O': 25, 'P': 26, 'Q': 27, 'R': 28,
+    'S': 29, 'T': 30, 'U': 31, 'V': 32, 'W': 33, 'X': 34, 'Y': 35, 'Z': 36
+  };
+
+  const multiplicadores = [18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 
   function generateRandomCode() {
     // Genera un código aleatorio de 4 dígitos
@@ -88,12 +96,24 @@ function Curp() {
     return 'X';
   };
 
-  const generarVocalAleatoria = () => {
-    const vocales = ['A', 'E', 'I', 'O', 'U'];
-    const indiceAleatorio = Math.floor(Math.random() * vocales.length);
-    return vocales[indiceAleatorio];
+  const generarCaracterAleatorio = (ano) => {
+    if (ano < 2000) {
+      return Math.floor(Math.random() * 10);
+    } else {
+      return 'A';
+    }
   };
 
+  const calcularSuma = (curp) => {
+    let suma = 0;
+    for (let i = 0; i < curp.length; i++) {
+      const caracter = curp.charAt(i);
+      const valor = valores[caracter];
+      const multiplicador = multiplicadores[i];
+      suma += valor * multiplicador;
+    }
+    return suma % 10;
+  };
 
 
   const generarCURP = () => {
@@ -112,11 +132,15 @@ function Curp() {
     const fechaNacimiento = ano.slice(-2) + mes.padStart(2, '0') + dia.padStart(2, '0');
     const entidadAbreviatura = entidadNacimiento.slice(0, 2);
     const sexoMayusculas = sexo.toUpperCase();
-    const vocalAleatoria = generarVocalAleatoria();
-    const digitoAleatorio = Math.floor(Math.random() * 9);
-    const curpGenerada = primeraLetraPrimerApellido + segundaVocalPrimerApellido + primeraLetraSegundoApellido + primeraLetraPrimerNombre + fechaNacimiento + sexoMayusculas + entidadAbreviatura + segundaConsonantePrimerApellido + segundaConsonanteSegundoApellido + primeraConsonantePrimerNombre + vocalAleatoria + digitoAleatorio;
+    const caracterAleatorio = generarCaracterAleatorio(parseInt(ano));
+    const curpGenerada = primeraLetraPrimerApellido + segundaVocalPrimerApellido + primeraLetraSegundoApellido + primeraLetraPrimerNombre + fechaNacimiento + sexoMayusculas + entidadAbreviatura + segundaConsonantePrimerApellido + segundaConsonanteSegundoApellido + primeraConsonantePrimerNombre + caracterAleatorio;
+    const suma = calcularSuma(curpGenerada);
+    let resultado = suma !== 0 ? 10 - (suma % 10) : suma;
+    if (resultado === 10) {
+      resultado = 0;
+    }
 
-    return curpGenerada;
+    return curpGenerada + resultado;
   };
 
   return (
